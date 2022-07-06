@@ -29,12 +29,14 @@ def items_view(request,id):
     }
     return render(request, "rslist/item_view.html",context)
 
+
+
 def sub_items_view(request,id):
-    queryset = Menulist.objects.get(id=id)
-    # queryset2= queryset.menulist.all()
+    queryset = Rslist.objects.get(id=id)
+    queryset2= queryset.sub.all()
     context = {
         'title' : queryset,
-        # 'obj' : queryset2
+        'obj' : queryset2
     }
     return render(request, "menulist/sub_item_list.html",context)
 

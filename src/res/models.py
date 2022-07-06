@@ -1,4 +1,4 @@
-import re
+
 from django.db import models
 from django.urls import reverse
 
@@ -6,16 +6,18 @@ from django.urls import reverse
 class Cuision(models.Model):    
     cuisine_type = models.TextField(blank=True,null=False)
 
+
     def __str__(self) -> str:
         return self.cuisine_type
 
 class Rslist(models.Model):
     
     name   = models.CharField(max_length=120)
+    
     content = models.TextField(blank=True, null=True)#description
     cuision = models.ManyToManyField(Cuision)
     type = models.TextField(max_length=10, choices=(('veg','veg'), ('non-veg','non-veg')), default="1")
-    
+   
 
 
     def __str__(self) -> str:
@@ -25,8 +27,9 @@ class Rslist(models.Model):
 
 
 class Menulist(models.Model):  
-    menu = models.ForeignKey(Rslist, on_delete=models.CASCADE,related_name="menulist")#belong which res
+    menu = models.ForeignKey(Rslist,on_delete=models.CASCADE,related_name="sub")#belong which res
     item = models.CharField(max_length=120)#item name
+   
     cuision_type = models.ForeignKey(Cuision,on_delete=models.CASCADE,related_name="cuision",default="1")
     price = models.IntegerField()
 

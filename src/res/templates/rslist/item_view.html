@@ -3,7 +3,12 @@
 <h2>{{title}}</h2>
 <ul>
 {% for x in obj %}
-    <li><a href="items/{{x.id}}">{{x}}</a></li>
+    <li><a href="items/{{x.id}}">{{x.item}}</a></li>
+    <ul>
+        <!-- <li>Restuarant name: {{x.menu}}</li>
+        <li>cuision_type:{{x.cuision_type}}</li>
+        <li>{{x.price}}</li> -->
+    </ul>
 {% endfor %}
 </ul>
 {% endblock content %}

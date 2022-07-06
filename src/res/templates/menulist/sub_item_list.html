@@ -4,11 +4,11 @@
 <h3>Cuisines_sub_item details</h3>
 <ul>
 {% for x in obj %}
-    <li><h3><a href="items/items//{{x.id}}">{{x.item}}</a></h3></li> 
+    <li><h3>Restuarant Name: <a href="items/{{x.id}}">{{x.menu}}</a></h3></li> 
     <ul> 
-        <li>{{x.menu}}</li>
-        <li>{{x.type}}</li>
-        <li>{{x.price}}</li>
+        <li>Item Name: {{x.item}}</li>
+        <li>Cuision Type: {{x.cuision_type}}</li>
+        <li>Price : {{x.price}}</li>
     </ul>
 {% endfor %}
 </ul>
