@@ -1,23 +1,17 @@
+from django.contrib import admin
 from django.urls import path
-from .views import (
-    RslistCreateView,
-    RslistDeleteView,
-    # RslistDetailView,
-    RslistListView,
-    RslistUpdateView,
-    MenuDetailView
-    
-  
-)
+from res.views import restuarant_details_view, restuarant_view, items_view,sub_items_view,rslist_delete_view,rslist_create_view
 
-
-app_name = 'rslist' #you can slove rslist reverse
-# app_name2 = "menulist"
 urlpatterns = [
-    path('', RslistListView.as_view(), name='rslist-list'),
-    path('create/', RslistCreateView.as_view(), name='rslist-create'),
-    # path('<int:id>/', RslistDetailView.as_view(), name='rslist-detail'),
-    path('<int:id>/', MenuDetailView.as_view(), name='rslist-detail'),
-    path('<int:id>/update/', RslistUpdateView.as_view(), name='rslist-update'),
-    path('<int:id>/delete/', RslistDeleteView.as_view(), name='rslist-delete'),
+    
+    path('',restuarant_details_view, name= 'list'),
+    path('res/<int:id>',restuarant_view , name='view'),
+    path('res/items/<int:id>',items_view , name='item'),
+    path('res/items/items/<int:id>',sub_items_view, name='subitem'),
+
+
+    path('res/<int:id>/delete',rslist_delete_view , name='view'),
+    path('res/<int:id>/create',rslist_create_view, name='create'),
+    
+
 ]

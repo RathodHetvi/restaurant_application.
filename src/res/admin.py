@@ -8,3 +8,7 @@ admin.site.register(Rslist)
 from .models import Menulist
 
 admin.site.register(Menulist)
+
+from .models import Cuision
+
+admin.site.register(Cuision)

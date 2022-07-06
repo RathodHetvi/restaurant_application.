@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>Cuisines_sub_item details</h3>
+<ul>
+{% for x in obj %}
+    <li><h3><a href="items/items//{{x.id}}">{{x.item}}</a></h3></li> 
+    <ul> 
+        <li>{{x.menu}}</li>
+        <li>{{x.type}}</li>
+        <li>{{x.price}}</li>
+    </ul>
+{% endfor %}
+</ul>
+</table> 
+{% endblock content %}

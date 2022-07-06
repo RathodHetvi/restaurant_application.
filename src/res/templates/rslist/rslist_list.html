@@ -1,13 +1,19 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-
-
-{% for instance in object_list %}
-     <p>{{ instance.id }} - <a href="{{ instance.get_absolute_url }}">{{ instance.name }}</a></p>
-     
+<h3>Restuarant details</h3>
+<ul>
+{% for x in obj %}
+    <li><h3><a href="res/{{x.id}}">{{x.name}}</a></h3></li> 
+    <ul> 
+        <li>{{x.content}}</li>
+    </ul>
+    
+      
+    
+   
+   
 {% endfor %}
-
-
-{% endblock %}
+</ul>
+</table> 
+{% endblock content %}

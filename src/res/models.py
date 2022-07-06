@@ -1,36 +1,41 @@
+import re
 from django.db import models
 from django.urls import reverse
+
+
+class Cuision(models.Model):    
+    cuisine_type = models.TextField(blank=True,null=False)
+
+    def __str__(self) -> str:
+        return self.cuisine_type
 
 class Rslist(models.Model):
     
     name   = models.CharField(max_length=120)
-    content = models.TextField()
-  
+    content = models.TextField(blank=True, null=True)#description
+    cuision = models.ManyToManyField(Cuision)
+    type = models.TextField(max_length=10, choices=(('veg','veg'), ('non-veg','non-veg')), default="1")
     
-    
-    def get_absolute_url(self):
-        return reverse("rslist:rslist-detail", kwargs={"id": self.id})
+
 
     def __str__(self) -> str:
         return self.name
 
-  
 
 
-class Menulist(models.Model):
-    item = models.CharField(max_length=120)
+
+class Menulist(models.Model):  
+    menu = models.ForeignKey(Rslist, on_delete=models.CASCADE,related_name="menulist")#belong which res
+    item = models.CharField(max_length=120)#item name
+    cuision_type = models.ForeignKey(Cuision,on_delete=models.CASCADE,related_name="cuision",default="1")
     price = models.IntegerField()
-    menu = models.ForeignKey(Rslist,on_delete=models.CASCADE)
-   
 
-    # def  get_absolute_url(self):
-    #     return reverse("menulist:menulist-detail",kwargs={"menu_id": self.id})
     
     def __str__(self) -> str:
         return self.item
 
-# class Cuision(models.Model):
-#     type = models.CharField(max_length=120)
+
+
 
 
 

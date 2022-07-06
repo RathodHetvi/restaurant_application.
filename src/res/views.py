@@ -1,96 +1,64 @@
-from tracemalloc import get_object_traceback
-from django.shortcuts import render, get_object_or_404
-from django.urls import reverse
-import requests
 
-from django.views.generic import (
-    CreateView,
-    DetailView,
-    ListView,
-    UpdateView,
-    ListView,
-    DeleteView,
-   
-)
+from django.shortcuts import render,get_object_or_404,redirect
+from .models import Rslist, Cuision, Menulist
+from .forms import RslistForm
+# Create your views here.
 
-from .forms import RslistModelForm
-from .models import Rslist,Menulist
+def restuarant_details_view(request):
+    queryset = Rslist.objects.all()
+    context = {
+        'obj' : queryset
+    }
+    return render(request, "rslist/rslist_list.html", context)
+
+def restuarant_view(request,id):
+    queryset= Rslist.objects.get(id=id)
+    queryset2= queryset.cuision.all()
+    context = {
+        'obj2' : queryset,
+        'obj' : queryset2
+    }
+    return render(request, "rslist/rslist_view.html",context)
+
+def items_view(request,id):
+    queryset = Cuision.objects.get(id=id)
+    queryset2 =  queryset.cuision.all()
+    context = {
+        'title' : queryset,
+        'obj' : queryset2
+    }
+    return render(request, "rslist/item_view.html",context)
+
+def sub_items_view(request,id):
+    queryset = Menulist.objects.get(id=id)
+    # queryset2= queryset.menulist.all()
+    context = {
+        'title' : queryset,
+        # 'obj' : queryset2
+    }
+    return render(request, "menulist/sub_item_list.html",context)
 
 
+def rslist_delete_view(request,id):
+    obj = get_object_or_404(Rslist, id=id)
+    # POST request  
+    if request.method == "POST":                            
+        obj.delete() #conforming delete 
+        return redirect('../../')
+    context={
+        'object': obj
+    }
 
-class RslistCreateView(CreateView):
-    template_name = 'rslist/rslist_create.html'
-    form_class = RslistModelForm
-    queryset = Rslist.objects.all() # <blog>/<modelname>_list.html
-    # success_url = '/' another method for...
+    return render(request, "rslist/rslist_delete.html",context)
 
-    def form_valid(self, form):
-        print(form.cleaned_data)
-        return super().form_valid(form)
-
-    # def get_success_url(self):
-    #    return '/'
-
-class RslistListView(ListView):
-    template_name = 'rslist/rslist_list.html'
-    queryset = Rslist.objects.all() # <res>/<modelname>_list.html
-
-
-
-class MenuDetailView(DetailView):
-    # template_name = 'rslist/rslist_detail.html'
-    template_name = 'menulist/menulist_list.html'
-    # queryset = Menulist.objects.all()
-
-    # queryset = Rslist.objects.all()
-    # queryset = Menulist.objects.all() # <blog>/<modelname>_list.html
-    # success_url = 'cuision/cuision_list.html' 
-
-    def get_object(self):
-        id_ = self.kwargs.get("id") 
-        return get_object_or_404(Menulist,id=id_)
-        
+def rslist_create_view(request,id=id):
+    form = RslistForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        form = RslistForm()
     
-   
-    
-       
-       
-        
 
-
-
-    
-    
-        
-
-
-class RslistUpdateView(UpdateView):
-    template_name = 'rslist/rslist_create.html'
-    form_class = RslistModelForm
-
-    def get_object(self):
-        id_ = self.kwargs.get("id")
-        return get_object_or_404(Rslist, id=id_)
-
-    def form_valid(self, form):
-        print(form.cleaned_data)
-        return super().form_valid(form)
-
-
-class RslistDeleteView(DeleteView):
-    template_name = 'rslist/rslist_delete.html'
-    
-    def get_object(self):
-        id_ = self.kwargs.get("id")
-        return get_object_or_404(Rslist, id=id_)
-
-    def get_success_url(self):
-        return reverse('rslist:rslist-list')
-
-
-
-
-
-
-
-
+    context={
+        'form':form
+    }
+    return render(request, "rslist/rslist_create.html",context)
