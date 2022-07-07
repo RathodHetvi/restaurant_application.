@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
 <form method="POST"> {% csrf_token %}
-    <h1>{{restaurant.name}}</h1>
-    <h3>do you want to delete the "{{restaurant.name}}" details ?</h3>
+    <h1>{{menuitem.item}}</h1>
+    <h3>do you want to delete the "{{menuitem.item}}" details ?</h3>
     <p><input type='submit' value='yes' /> <a href='../../'>cancle</a></p>
 </form>
 {% endblock content %}

@@ -1,14 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>{{title}}</h2>
-<ul>
-{% for x in obj %}
-    <li><a href="items/{{x.id}}">{{x.item}}</a></li>
-    <ul>
-        <!-- <li>Restuarant name: {{x.menu}}</li>
-        <li>cuision_type:{{x.cuision_type}}</li>
-        <li>{{x.price}}</li> -->
-    </ul>
-{% endfor %}
-</ul>
+<h2>{{item_name}}</h2>
+<p>{{item_name.description}}</p>
+<p>
+<b>Cuisines type: </b>{{item_name.cuisines_type}}<br>
+<b>Price: </b>{{item_name.price}}<br>
+<b>Type: </b>{{item_name.ven}}<br>
+<b>Restuarant: </b>{{item_name.menu}}
+</p>
 {% endblock content %}

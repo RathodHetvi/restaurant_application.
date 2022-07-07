@@ -3,17 +3,19 @@
 {% block content %}
 <h3>Restuarant details</h3>
 <ul>
-{% for x in obj %}
-    <li><h3><a href="res/{{x.id}}">{{x.name}}</a></h3></li> 
+{% for res_name in retaurants %}
+    <li><h3><a href="res/{{res_name.id}}">{{res_name.name}}</a></h3></li> 
     <ul> 
-        <li>{{x.content}}</li>
+        <li>{{res_name.content}}</li>
+        
+        {% for cus_name in cuision_n %}
+        <li>{{cus_name.cuision</li>
+        {% endfor %}
     </ul>
-    
-      
-    
-   
-   
+    <a href="res/{{res_name.id}}/update">Edit</a>  <a href="res/{{res_name.id}}/delete">Delete</a>
 {% endfor %}
 </ul>
-</table> 
+
+<h4><a href="create/">add a Restuarant</a></h4>
+
 {% endblock content %}
