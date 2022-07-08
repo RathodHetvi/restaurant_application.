@@ -1,17 +1,20 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>{{retaurants}}</h2>
-<p>{{retaurants.content}}</p>
+<h1>{{retaurants}}</h1>
+<h4>Description: {{retaurants.content}}</h4>
+<h4>Rating: {{retaurants.rating}}</h4>
+<h4>Contact us: {{retaurants.contact}}</h4>
+
 <p>
     <b>Cuisines: </b>
-    {% for cui in cuision_names %}
-        <li>{{cui}}</li>
+    {% for cuim in cuision_names %}
+        <li><a href='{{cuim.id}}/cuisines/'>{{cuim}}</li></a>
+        
     {% endfor %}<br>
-    <a href="../cui_add/">Edit</a>
-    <!-- <b>Rating: </b>{{retaurants.rating}}<br>
-    <b>Location: </b>{{retaurants.location}}<br>
-    <b>Contact: </b>{{retaurants.contact}}<br>
-    <b>Email: </b>{{retaurants.email}}<br> -->
+    
+
+    
+  
 </p>
 
 <h3>Menu Items: </h3>
@@ -24,23 +27,23 @@
     <th>Edit</th>
     <th>Delete</th>
 </tr>
-{% for cui in menu_name %}
+{% for cui in menu_name %}<!--menu_name-->
     <tr>
-        <td><a href="items/{{cui.id}}">{{cui}}</a></td>
-        <td>{{cui.price}} Rs.</td>
+        <td><a href="../items/{{cui.id}}">{{cui}}</a></td>
+        <td>{{cui.price}}</td>
         <td>{{cui.cuision_type}}</td>
         <td>{{cui.ven}}</td>
-        <td><a href="res/items/{{res_name.id}}/update/">Edit</a></td>
-        <td><a href="../../delete/">delete</a></td>
-        <!-- <td><a href="../delete/">Delete</a></td> -->
-    
+        <td><a href="{{cui.id}}/update/">Edit</a></td>
+        <td><a href="{{cui.id}}/delete/">Delete</a></td>
+        
     </tr>
 
 
 {% endfor %}
     <tr>
-        <td colspan="6" ><a href="../add/">add MenuItem</a></td>
+        <td colspan="6" ><a href="create/">add MenuItem</a></td>
       
     </tr>
 </table>
+<h3><a href="../../"><-Retaurants</a></h3>
 {% endblock content %}

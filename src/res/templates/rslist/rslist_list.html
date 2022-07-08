@@ -1,21 +1,35 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h3>Restuarant details</h3>
+<h2>Restuarants</h2>
 <ul>
-{% for res_name in retaurants %}
-    <li><h3><a href="res/{{res_name.id}}">{{res_name.name}}</a></h3></li> 
+{% for res in restuarant%}
+    <li><h3><a href="restuarant/{{res.id}}">{{res.name}}</a></h3></li> 
     <ul> 
-        <li>{{res_name.content}}</li>
+        <li>{{res.content}}</li>
+        <li> <h5>Contact:{{res.contact}}</h5></li>
+       <li><h5>cuisines:{% for cuis in res.cuision.all %} 
+            {{cuis}}<br>
+            {% endfor %}</h5></li>
         
-        {% for cus_name in cuision_n %}
-        <li>{{cus_name.cuision</li>
-        {% endfor %}
     </ul>
-    <a href="res/{{res_name.id}}/update">Edit</a>  <a href="res/{{res_name.id}}/delete">Delete</a>
+
+    <a href="{{res.id}}/">Edit</a>  <a href="{{res.id}}/delete">Delete</a>
 {% endfor %}
 </ul>
 
-<h4><a href="create/">add a Restuarant</a></h4>
+<h4><a href="add/">add a Restuarant</a></h4>
+
+
+
+
+<h3>All Cuisines details</h3>
+<ul>
+    {% for cui in cuision %}
+    <li><a href="../{{cui.id}}/edit/cuisines">{{cui}}</a></li>
+    {% endfor %}
+</ul>
+<p><a href="add/cuisines">Add Cuisines</a></p><br>
+
 
 {% endblock content %}

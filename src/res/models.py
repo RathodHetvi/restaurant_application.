@@ -12,17 +12,15 @@ class Cuision(models.Model):
 class Rslist(models.Model):
     
     name   = models.CharField(max_length=120)
-    
     content = models.TextField(blank=True, null=True)#description
     cuision = models.ManyToManyField(Cuision)
     type = models.CharField(max_length=10, choices=(('veg','veg'), ('non-veg','non-veg')), default="1")
-   
-
+    rating = models.FloatField()
+    contact =models.CharField(max_length=10)
+    
 
     def __str__(self) -> str:
         return self.name
-
-
 
 
 class Menulist(models.Model):  

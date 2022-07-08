@@ -86,8 +86,6 @@ class CuisionForm(forms.ModelForm):
         model = Cuision
         fields = [
             'cuisine_type',
-            
-
-                
+                           
         ]
 
